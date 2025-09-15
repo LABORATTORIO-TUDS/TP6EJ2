@@ -8,7 +8,7 @@ package tp6ej2;
  *
  * @author crist
  */
-public class Producto {
+public class Producto implements Comparable<Producto>{
     
     private int codigo;
     private String descripcion;
@@ -67,6 +67,9 @@ public class Producto {
         this.rubro = rubro;
     }
     
-    
+    @Override
+    public int compareTo(Producto producto2){
+    return Integer.compare(codigo, producto2.codigo);
+    }
     
 }
