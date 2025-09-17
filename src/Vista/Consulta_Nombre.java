@@ -4,6 +4,10 @@
  */
 package Vista;
 
+import javax.swing.table.DefaultTableModel;
+import tp6ej2.Producto;
+import static tp6ej2.TP6EJ2.depositoProductos;
+
 /**
  *
  * @author Usuario
@@ -15,6 +19,7 @@ public class Consulta_Nombre extends javax.swing.JFrame {
      */
     public Consulta_Nombre() {
         initComponents();
+        this.refreshTable();
     }
 
     /**
@@ -28,12 +33,12 @@ public class Consulta_Nombre extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jfnombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtproducto = new javax.swing.JTable();
         Buscar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setText("Listado por Nombre");
@@ -41,18 +46,21 @@ public class Consulta_Nombre extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Ingrese Descripcion:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jfnombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jfnombreActionPerformed(evt);
+            }
+        });
+
+        jtproducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Codigo", "Descripcion", "Precio", "Categoria", "Stock"
+                "Nombre", "Categoria", "Precio"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtproducto);
 
         Buscar.setText("BUSCAR");
         Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +81,7 @@ public class Consulta_Nombre extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jfnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -89,7 +97,7 @@ public class Consulta_Nombre extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jfnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -101,9 +109,34 @@ public class Consulta_Nombre extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-      
+    this.refreshTable();
     }//GEN-LAST:event_BuscarActionPerformed
 
+    private void jfnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jfnombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jfnombreActionPerformed
+
+      private void refreshTable() {
+        DefaultTableModel modelo = (DefaultTableModel) jtproducto.getModel();
+        String nom = this.jfnombre.getText();
+        modelo.setRowCount(0);
+        
+        if (nom == null) {
+            nom = "";
+        }
+
+        for (Producto data : depositoProductos) {
+            
+            if (data.getDescripcion().contains(nom)) {
+                  Object[] fila = {
+                data.getCodigo(), data.getDescripcion(), data.getPrecio(), data.getRubro(), data.getStock(), data.getPrecio()
+            };
+            modelo.addRow(fila);
+            }
+
+        }
+      
+    }
     /**
      * @param args the command line arguments
      */
@@ -145,7 +178,7 @@ public class Consulta_Nombre extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jfnombre;
+    private javax.swing.JTable jtproducto;
     // End of variables declaration//GEN-END:variables
 }

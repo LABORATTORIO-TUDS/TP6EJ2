@@ -90,6 +90,11 @@ public class Ej_Frame extends javax.swing.JFrame {
         jMenu2.add(CNombre);
 
         CPrecio.setText(" Consulta por Precio");
+        CPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CPrecioActionPerformed(evt);
+            }
+        });
         jMenu2.add(CPrecio);
 
         CRubro.setText("Consulta por Rubro");
@@ -123,13 +128,13 @@ public class Ej_Frame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CRubroActionPerformed
-        // TODO add your handling code here:
+    new Consulta_Rubro().setVisible(true);
     }//GEN-LAST:event_CRubroActionPerformed
 
     private void CNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNombreActionPerformed
         // TODO add your handling code here:
        new Consulta_Nombre().setVisible(true);
-       new Consulta_Precio().setVisible(true);
+    
        
     }//GEN-LAST:event_CNombreActionPerformed
 
@@ -137,6 +142,10 @@ public class Ej_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Administracion().setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void CPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPrecioActionPerformed
+        new Consulta_Precio().setVisible(true);
+    }//GEN-LAST:event_CPrecioActionPerformed
 
     /**
      * @param args the command line arguments

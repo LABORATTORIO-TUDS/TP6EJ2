@@ -33,7 +33,7 @@ public class Consulta_Rubro extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         combo = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
