@@ -28,7 +28,7 @@ public class TP6EJ2 {
         depositoProductos.add(new Producto(18,"Microhondas",4500.75,3, "Electrodomesticos" ));
 
         
-        new Administracion().setVisible(true);
+        new Ej_Frame().setVisible(true);
     }
     
 }

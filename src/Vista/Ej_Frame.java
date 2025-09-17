@@ -72,6 +72,11 @@ public class Ej_Frame extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Administracion");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consultas");
@@ -127,6 +132,11 @@ public class Ej_Frame extends javax.swing.JFrame {
        new Consulta_Precio().setVisible(true);
        
     }//GEN-LAST:event_CNombreActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        new Administracion().setVisible(true);
+    }//GEN-LAST:event_jMenu1MouseClicked
 
     /**
      * @param args the command line arguments
