@@ -4,7 +4,10 @@
  */
 package Vista;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tp6ej2.Producto;
+import tp6ej2.TP6EJ2;
 
 /**
  *
@@ -17,8 +20,21 @@ public class Consulta_Precio extends javax.swing.JFrame {
      */
     public Consulta_Precio() {
         initComponents();
+        this.refreshTable();
     }
 
+    private void refreshTable(){
+      DefaultTableModel modelo = (DefaultTableModel) tabla1.getModel();
+        modelo.setRowCount(0);
+        Double min = Double.parseDouble(this.jfMIN.getText());
+        Double max = Double.parseDouble(this.jfMax.getText());
+        for (Producto depositoProducto : TP6EJ2.depositoProductos) {
+            if(max>depositoProducto.getPrecio() && min<depositoProducto.getPrecio()){
+                Object[] mod = {depositoProducto.getCodigo(),depositoProducto.getDescripcion(),depositoProducto.getPrecio(),depositoProducto.getRubro(),depositoProducto.getStock()}; 
+                modelo.addRow(mod);
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,8 +47,8 @@ public class Consulta_Precio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtMIN = new javax.swing.JTextField();
-        jtMax = new javax.swing.JTextField();
+        jfMIN = new javax.swing.JTextField();
+        jfMax = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla1 = new javax.swing.JTable();
         Buscar = new javax.swing.JButton();
@@ -46,17 +62,17 @@ public class Consulta_Precio extends javax.swing.JFrame {
 
         jLabel3.setText("Y");
 
-        jtMIN.setText("MIN");
-        jtMIN.addActionListener(new java.awt.event.ActionListener() {
+        jfMIN.setText("0");
+        jfMIN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtMINActionPerformed(evt);
+                jfMINActionPerformed(evt);
             }
         });
 
-        jtMax.setText("MAX");
-        jtMax.addActionListener(new java.awt.event.ActionListener() {
+        jfMax.setText("9999");
+        jfMax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtMaxActionPerformed(evt);
+                jfMaxActionPerformed(evt);
             }
         });
 
@@ -93,11 +109,11 @@ public class Consulta_Precio extends javax.swing.JFrame {
                         .addGap(111, 111, 111)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jfMIN, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jfMax, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -114,9 +130,9 @@ public class Consulta_Precio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jfMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)
-                        .addComponent(jtMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jfMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,19 +143,19 @@ public class Consulta_Precio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtMINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtMINActionPerformed
+    private void jfMINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jfMINActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtMINActionPerformed
+    }//GEN-LAST:event_jfMINActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel modelo = (DefaultTableModel) tabla1.getModel();
-        
+        this.refreshTable();
+      
     }//GEN-LAST:event_BuscarActionPerformed
 
-    private void jtMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtMaxActionPerformed
+    private void jfMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jfMaxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtMaxActionPerformed
+    }//GEN-LAST:event_jfMaxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,8 +198,8 @@ public class Consulta_Precio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jtMIN;
-    private javax.swing.JTextField jtMax;
+    private javax.swing.JTextField jfMIN;
+    private javax.swing.JTextField jfMax;
     private javax.swing.JTable tabla1;
     // End of variables declaration//GEN-END:variables
 }

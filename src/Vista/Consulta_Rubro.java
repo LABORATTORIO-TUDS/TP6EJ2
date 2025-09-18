@@ -4,6 +4,11 @@
  */
 package Vista;
 
+import javax.swing.table.DefaultTableModel;
+import tp6ej2.Producto;
+import static tp6ej2.TP6EJ2.depositoProductos;
+import static tp6ej2.TP6EJ2.rubros;
+
 /**
  *
  * @author Usuario
@@ -15,8 +20,33 @@ public class Consulta_Rubro extends javax.swing.JFrame {
      */
     public Consulta_Rubro() {
         initComponents();
+        combo.removeAllItems();
+        for(String rubro : rubros){
+            combo.addItem(rubro);
+        }
+        this.refreshTable();
+        
+        
     }
-
+ private void refreshTable() {
+        DefaultTableModel modelo = (DefaultTableModel) tabla1.getModel();
+        String rub = this.combo.getSelectedItem().toString();
+        modelo.setRowCount(0);
+        
+        if (rub == null) {
+            rub = "Almacen";
+        }
+       
+        for (Producto data : depositoProductos) {
+            
+            if (data.getRubro()  == rub) {
+                  Object[] fila = {
+                data.getCodigo(), data.getDescripcion(), data.getPrecio(), data.getRubro(), data.getStock(), data.getPrecio()
+            };
+            modelo.addRow(fila);
+            }
+        }
+ }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,9 +97,9 @@ public class Consulta_Rubro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGap(48, 48, 48)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
@@ -91,18 +121,21 @@ public class Consulta_Rubro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-       
+       this.refreshTable();
 
     }//GEN-LAST:event_BuscarActionPerformed
 
